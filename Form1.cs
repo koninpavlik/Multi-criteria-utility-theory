@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Mapack;
 
 namespace Lab5
 {
@@ -23,10 +19,13 @@ namespace Lab5
             {
                 dataGridView1.Columns.Add(i.ToString(), i.ToString());
                 dataGridView1.Columns[i].DefaultCellStyle.NullValue = "0";
-                dataGridView3.Columns.Add(i.ToString(), i.ToString());
-                dataGridView3.Columns[i].DefaultCellStyle.NullValue = "0";
                 dataGridView4.Columns.Add(i.ToString(), i.ToString());
                 dataGridView4.Columns[i].DefaultCellStyle.NullValue = "0";
+            }
+            for (int i = 0; i < numericUpDownCriteries.Value; i++)
+            {
+                dataGridView3.Columns.Add(i.ToString(), i.ToString());
+                dataGridView3.Columns[i].DefaultCellStyle.NullValue = "0";
             }
             for (int i = 0; i < numericUpDownCriteries.Value; i++)
             {
@@ -34,7 +33,10 @@ namespace Lab5
             }
 
             dataGridView3.Rows.Add();
-            dataGridView4.Rows.Add();
+            for (int i = 0; i < numericUpDownCriteries.Value; i++)
+            {
+                dataGridView4.Rows.Add();
+            }
         }
 
         private void numericUpDownCriteries_ValueChanged(object sender, EventArgs e)
@@ -42,10 +44,15 @@ namespace Lab5
             if (Convert.ToInt32(((UpDownBase)sender).Text) < numericUpDownCriteries.Value)
             {
                 dataGridView1.Rows.Add();
+                dataGridView3.Columns.Add((dataGridView3.Columns.Count).ToString(), (dataGridView3.Columns.Count).ToString());
+                dataGridView3.Columns[dataGridView3.Columns.Count - 1].DefaultCellStyle.NullValue = "0";
+                dataGridView4.Rows.Add();
             }
             else
             {
                 dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+                dataGridView3.Columns.Remove((Convert.ToInt32(((UpDownBase)sender).Text) - 1).ToString());
+                dataGridView4.Rows.RemoveAt(dataGridView4.Rows.Count - 1);
             }
         }
 
@@ -55,18 +62,29 @@ namespace Lab5
             {
                 dataGridView1.Columns.Add((dataGridView1.Columns.Count).ToString(), (dataGridView1.Columns.Count).ToString());
                 dataGridView1.Columns[dataGridView1.Columns.Count - 1].DefaultCellStyle.NullValue = "0";
-                dataGridView3.Columns.Add((dataGridView3.Columns.Count).ToString(), (dataGridView3.Columns.Count).ToString());
-                dataGridView3.Columns[dataGridView3.Columns.Count - 1].DefaultCellStyle.NullValue = "0";
-                dataGridView4.Columns.Add((dataGridView3.Columns.Count).ToString(), (dataGridView3.Columns.Count).ToString());
-                dataGridView4.Columns[dataGridView3.Columns.Count - 1].DefaultCellStyle.NullValue = "0";
+                dataGridView4.Columns.Add((dataGridView4.Columns.Count).ToString(), (dataGridView4.Columns.Count).ToString());
+                dataGridView4.Columns[dataGridView4.Columns.Count - 1].DefaultCellStyle.NullValue = "0";
 
             }
             else
             {
                 dataGridView1.Columns.Remove((Convert.ToInt32(((UpDownBase)sender).Text) - 1).ToString());
-                dataGridView3.Columns.Remove((Convert.ToInt32(((UpDownBase)sender).Text) - 1).ToString());
                 dataGridView4.Columns.Remove((Convert.ToInt32(((UpDownBase)sender).Text) - 1).ToString());
             }
+        }
+
+        private static List<List<double>> dgwTo2dListOfDouble(DataGridView dataGridView)
+        {
+            List<List<double>> list = new List<List<double>>();
+            for (int i2 = 0; i2 < dataGridView.Rows.Count; i2++)
+            {
+                list.Add(new List<double>());
+                for (int j2 = 0; j2 < dataGridView.Columns.Count; j2++)
+                {
+                    list[i2].Add(Convert.ToDouble(dataGridView.Rows[i2].Cells[j2].Value));
+                }
+            }
+            return list;
         }
 
         private void buttonRandomize_Click(object sender, EventArgs e)
@@ -76,10 +94,13 @@ namespace Lab5
             {
                 for (int j = 0; j < dataGridView1.Rows.Count; j++)
                 {
-                    dataGridView1.Rows[j].Cells[i].Value = rnd.Next(0, 15).ToString();
-                    dataGridView3.Rows[0].Cells[i].Value = rnd.Next(0, 15).ToString();
-                    dataGridView4.Rows[0].Cells[i].Value = rnd.Next(0, 15).ToString();
+                    dataGridView1.Rows[j].Cells[i].Value = rnd.Next(0, 3).ToString();
+                    dataGridView4.Rows[j].Cells[i].Value = rnd.Next(0, 3).ToString();
                 }
+            }
+            for (int i = 0; i < numericUpDownCriteries.Value; i++)
+            {
+                dataGridView3.Rows[0].Cells[i].Value = rnd.Next(0, 3).ToString();
             }
         }
 
@@ -93,58 +114,73 @@ namespace Lab5
             return sum;
         }
 
+        private static Matrix GetMatrixFromListOfLists(List<List<double>> matrix)
+        {
+            var mtrx = new Matrix(matrix.Count, matrix[0].Count);
+
+            for (int i = 0; i < matrix.Count; i++)
+            {
+                for (int j = 0; j < matrix[i].Count; j++)
+                {
+                    mtrx[i, j] = Math.Round(matrix[i][j], 2);
+                }
+            }
+
+            return mtrx;
+        }
+
+        private static void PrintMatrix(Matrix matrix)
+        {
+            for (int i = 0; i < matrix.Rows; i++)
+            {
+                for (int j = 0; j < matrix.Columns; j++)
+                {
+                    Console.Write(matrix[i, j].ToString("0.00") + "  ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
         private void buttonCalculate_Click(object sender, EventArgs e)
         {
-            dataGridView2.Rows.Clear();
-            dataGridView2.Columns.Clear();
-            dataGridView2.Refresh();
+            var matrix = dgwTo2dListOfDouble(dataGridView1);
+            var mtrx = GetMatrixFromListOfLists(matrix);
+            PrintMatrix(mtrx);
 
-            List<List<double>> matrix = new List<List<double>>();
+            var matrixTrans = mtrx;
 
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < matrixTrans.Rows; i++)
             {
-                matrix.Add(new List<double>());
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                for (int j = 0; j < matrixTrans.Columns; j++)
                 {
-                    var value = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value) * Convert.ToDouble(dataGridView3.Rows[dataGridView3.RowCount - 1].Cells[j].Value);
-                    matrix[i].Add(value);
+                    matrixTrans[i, j] = Convert.ToDouble(dataGridView4.Rows[i].Cells[j].Value);
                 }
             }
 
-            double result = 0;
+            mtrx = matrixTrans.Transpose();
 
-            int index = 0;
+            var finalResult = new List<double>();
 
-            for (int j = 0; j < matrix.Count; j++)
+            for (int i = 0; i < mtrx.Rows; i++)
             {
-                double localResult = 0;
-                for (int i = 0; i < matrix[j].Count; i++)
+                double sum = 0;
+                for (int j = 0; j < mtrx.Columns; j++)
                 {
-                    localResult += Math.Pow(matrix[j][i] - Convert.ToDouble(dataGridView4.Rows[0].Cells[i].Value), 2);
+                    sum += mtrx[i, j] * Convert.ToDouble(dataGridView3.Rows[0].Cells[j].Value);
                 }
-
-                if (localResult > result)
-                {
-                    result = localResult;
-                    index = j;
-                }
+                finalResult.Add(sum);
             }
 
-            for (int i = 0; i <= numericUpDownElements.Value; i++)
+            int UIndex = 0;
+
+            richTextBox1.Text = "";
+            
+            foreach (var item in finalResult)
             {
-                dataGridView2.Columns.Add(i.ToString(), i.ToString());
-                dataGridView2.Columns[i].DefaultCellStyle.NullValue = "0";
+                richTextBox1.Text += $"U({UIndex++}) = {item} \n";
             }
 
-
-            dataGridView2.Rows.Add();
-            for (int j = 0; j < matrix[index].Count; j++)
-            {
-                dataGridView2.Rows[0].Cells[j].Value = matrix[index][j];
-            }
-
-            richTextBox1.Text = $"Оптимальный вектор {index} \n";
-            richTextBox1.Text += $"Результат: sqrt({result}) = {Math.Sqrt(result)}";
         }
     }
 }

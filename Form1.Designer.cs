@@ -33,8 +33,6 @@ namespace Lab5
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.buttonCalculate = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -50,8 +48,6 @@ namespace Lab5
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -67,9 +63,9 @@ namespace Lab5
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.richTextBox1);
-            this.groupBox9.Location = new System.Drawing.Point(3, 752);
+            this.groupBox9.Location = new System.Drawing.Point(3, 796);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(855, 129);
+            this.groupBox9.Size = new System.Drawing.Size(1028, 166);
             this.groupBox9.TabIndex = 33;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Результат";
@@ -78,7 +74,7 @@ namespace Lab5
             // 
             this.richTextBox1.Location = new System.Drawing.Point(6, 19);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(843, 104);
+            this.richTextBox1.Size = new System.Drawing.Size(1016, 141);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -87,7 +83,7 @@ namespace Lab5
             this.groupBox7.Controls.Add(this.dataGridView3);
             this.groupBox7.Location = new System.Drawing.Point(3, 60);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(855, 112);
+            this.groupBox7.Size = new System.Drawing.Size(1028, 112);
             this.groupBox7.TabIndex = 31;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Ввод весов";
@@ -98,27 +94,8 @@ namespace Lab5
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(6, 19);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(844, 76);
+            this.dataGridView3.Size = new System.Drawing.Size(1017, 76);
             this.dataGridView3.TabIndex = 0;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.dataGridView2);
-            this.groupBox6.Location = new System.Drawing.Point(3, 617);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(855, 129);
-            this.groupBox6.TabIndex = 28;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Результат";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(844, 104);
-            this.dataGridView2.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -165,7 +142,7 @@ namespace Lab5
             this.groupBox4.Controls.Add(this.dataGridView1);
             this.groupBox4.Location = new System.Drawing.Point(3, 178);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(855, 315);
+            this.groupBox4.Size = new System.Drawing.Size(1028, 315);
             this.groupBox4.TabIndex = 27;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ввод значений";
@@ -176,7 +153,7 @@ namespace Lab5
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(844, 290);
+            this.dataGridView1.Size = new System.Drawing.Size(1017, 290);
             this.dataGridView1.TabIndex = 0;
             // 
             // groupBox2
@@ -187,7 +164,7 @@ namespace Lab5
             this.groupBox2.Size = new System.Drawing.Size(139, 52);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Количество элементов";
+            this.groupBox2.Text = "Количество векторов";
             // 
             // numericUpDownElements
             // 
@@ -250,10 +227,10 @@ namespace Lab5
             this.groupBox8.Controls.Add(this.dataGridView4);
             this.groupBox8.Location = new System.Drawing.Point(3, 499);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(855, 112);
+            this.groupBox8.Size = new System.Drawing.Size(1028, 291);
             this.groupBox8.TabIndex = 32;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Ввод z";
+            this.groupBox8.Text = "Ввод значений функции полезности";
             // 
             // dataGridView4
             // 
@@ -261,17 +238,16 @@ namespace Lab5
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Location = new System.Drawing.Point(6, 19);
             this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(844, 76);
+            this.dataGridView4.Size = new System.Drawing.Size(1017, 266);
             this.dataGridView4.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 941);
+            this.ClientSize = new System.Drawing.Size(1065, 974);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox7);
-            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
@@ -279,12 +255,10 @@ namespace Lab5
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox8);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Многокритериальная теория полезности";
             this.groupBox9.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -305,8 +279,6 @@ namespace Lab5
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button buttonCalculate;
         private System.Windows.Forms.GroupBox groupBox3;
